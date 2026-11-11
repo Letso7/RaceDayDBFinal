@@ -1,0 +1,20 @@
+services:
+raceday-api:
+build:
+context: .
+dockerfile: RaceDay.API/Dockerfile
+ports:
+- "5001:8080"
+container_name: raceday-api
+
+raceday-mvc:
+build:
+context: .
+dockerfile: RaceDay.MVC/Dockerfile
+ports:
+- "5000:8080"
+depends_on:
+- raceday-api
+container_name: raceday-mvc
+environment:
+- ApiBaseUrl=http://raceday-api:8080
