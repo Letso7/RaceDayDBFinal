@@ -1,0 +1,19 @@
+﻿@model List<RaceDay.MVC.Models.EnrolmentVM>
+<h2>My Events</h2>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You haven't enrolled yet. <a asp-action="Index">Browse Events</a></div>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>Event</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr><td>@e.EventName</td><td>@e.Status</td><td>@e.EnrolmentDate.ToShortDateString()</td></tr>
+            }
+        </tbody>
+    </table>
+}
+<a asp-action="Index">Back</a>
