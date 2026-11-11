@@ -1,0 +1,21 @@
+﻿@model List<RaceDay.MVC.Models.EventVM>
+<h2>Organiser Dashboard</h2>
+<p>Total Events: @ViewBag.TotalEvents | Total Enrolments: @ViewBag.TotalEnrolments</p>
+<a asp-action="Create" class="btn btn-success mb-3">+ Create New Event</a>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No events yet. Create one!</div>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>Name</th><th>Location</th><th>Date</th><th>Enrolments</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr><td>@e.EventName</td><td>@e.Location</td><td>@e.EventDate.ToShortDateString()</td><td>@e.TotalEnrolments</td><td><a asp-action="Enrolments" asp-route-id="@e.EventId" class="btn btn-sm btn-primary">View Enrolments</a></td></tr>
+            }
+        </tbody>
+    </table>
+}
+<a asp-controller="Account" asp-action="Logout">Logout</a>
