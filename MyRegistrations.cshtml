@@ -1,0 +1,49 @@
+﻿@model List<RaceDay.MVC.Models.Registration>
+@{
+    ViewData["Title"] = "My Registrations - RaceDay";
+}
+
+
+<h2 class="mb-1">My Registrations</h2>
+<p class="text-muted">All the races you have registered for</p>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        You haven't registered for any races yet.
+        <a asp-controller="Home" asp-action="Index">Browse Events</a> to find one.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Registration ID</th>
+                <th>User ID</th>
+                <th>Category ID</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.RegistrationId</td>
+                    <td>@r.UserId</td>
+                    <td>@r.CategoryId</td>
+                    <td>
+                        @if (r.Status == "Confirmed")
+                        {
+                            <span class="badge bg-success">@r.Status</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">@r.Status</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
